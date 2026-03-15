@@ -17,22 +17,17 @@ module.exports = {
 
                 let LogChannel = await message.client.channels.fetch(LogChannelId)
 
-                console.log(LogChannel)
-                if(AutomaticBan) {
-                    message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
-                    let unbanButton = new ButtonBuilder()
-                    .setEmoji("❤️")
-                    .setLabel("Unban?")
-                    .setCustomId(`unban_${message.author.id}`)
-                    .setStyle(ButtonStyle.Success)
+                // console.log(LogChannel)
+                message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
+                let unbanButton = new ButtonBuilder()
+                .setEmoji("❤️")
+                .setLabel("Unban?")
+                .setCustomId(`unban_${message.author.id}`)
+                .setStyle(ButtonStyle.Success)
 
-                    const row = new ActionRowBuilder().addComponents(unbanButton)
+                const row = new ActionRowBuilder().addComponents(unbanButton)
 
-                    LogChannel.send({embeds: [Embed], components: [row]})
-                } else {
-                    LogChannel.send({embeds: [Embed]})
-                }
-
+                LogChannel.send({embeds: [Embed], components: [row]})
 
             }
         } catch (error) {
