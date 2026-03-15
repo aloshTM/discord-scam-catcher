@@ -1,5 +1,5 @@
-const { Events, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, PermissionsBitField } = require('discord.js');
-const { HoneypotChannelId, LogChannelId } = require('../Config.json')
+const { Events, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { HoneypotChannelId, LogChannelId, AutomaticBan } = require('../Config.json')
 
 module.exports = {
     name: Events.MessageCreate,
