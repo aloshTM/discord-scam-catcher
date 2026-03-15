@@ -1,0 +1,7 @@
+{
+	"token": "get this from discord dev portal",
+	"HoneypotChannelId": "copy channel id from the channel you dont want people sending messages in here",
+	"ShouldLog": true,
+	"LogChannelId": "copy channel id you want log messages sent to and put it here",
+	"AutomaticBan": true
+}
