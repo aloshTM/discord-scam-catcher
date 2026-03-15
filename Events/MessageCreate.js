@@ -1,5 +1,5 @@
-const { Events, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require('discord.js');
-const { HoneypotChannelId, LogChannelId, AutomaticBan } = require('../Config.json')
+const { Events, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, PermissionsBitField } = require('discord.js');
+const { HoneypotChannelId, LogChannelId } = require('../Config.json')
 
 module.exports = {
     name: Events.MessageCreate,
@@ -18,16 +18,20 @@ module.exports = {
                 let LogChannel = await message.client.channels.fetch(LogChannelId)
 
                 // console.log(LogChannel)
-                message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
-                let unbanButton = new ButtonBuilder()
-                .setEmoji("❤️")
-                .setLabel("Unban?")
-                .setCustomId(`unban_${message.author.id}`)
-                .setStyle(ButtonStyle.Success)
+                if (message.member.permissions.has(PermissionsBitField.Flags.BanMembers) || message.member.permissions.has(PermissionsBitField.Flags.ModerateMembers) || message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+                    return // prevents mods or admins from getting banned by the bot.
+                } else {
+                    message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
+                    let unbanButton = new ButtonBuilder()
+                    .setEmoji("❤️")
+                    .setLabel("Unban?")
+                    .setCustomId(`unban_${message.author.id}`)
+                    .setStyle(ButtonStyle.Success)
 
-                const row = new ActionRowBuilder().addComponents(unbanButton)
+                    const row = new ActionRowBuilder().addComponents(unbanButton)
 
-                LogChannel.send({embeds: [Embed], components: [row]})
+                    LogChannel.send({embeds: [Embed], components: [row]})
+                }
 
             }
         } catch (error) {
