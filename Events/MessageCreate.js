@@ -14,15 +14,12 @@ module.exports = {
                 .setTimestamp()
                 .setColor("#e67e22")
                 .setAuthor({ name: 'Pikas Discord Scam Detector', url: 'https://github.com/pl-k4' })
-                
-                message.delete()
 
                 let LogChannel = await message.client.channels.fetch(LogChannelId)
 
                 console.log(LogChannel)
                 if(AutomaticBan) {
-                    // message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
-                    console.log("ban")
+                    message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pikas discord scam detector"})
                     let unbanButton = new ButtonBuilder()
                     .setEmoji("❤️")
                     .setLabel("Unban?")
