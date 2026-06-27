@@ -19,6 +19,11 @@ module.exports = {
                     } else {
                         interaction.reply({ content: 'You dont have permissions to unban users!', flags: MessageFlags.Ephemeral })
                     }
+                } else if(buttonId.startsWith("preview_")) {
+                    const contentField = interaction.message.embeds?.[0]?.fields?.find(field => field.name === "Message Content")
+                    const messageText = contentField ? contentField.value : "Unable to retrieve message content."
+
+                    interaction.reply({ content: `🔎 Preview of message:\n${messageText}`, flags: MessageFlags.Ephemeral })
                 }
             }   
         } catch (error) {
