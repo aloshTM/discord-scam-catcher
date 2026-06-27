@@ -29,7 +29,7 @@ module.exports = {
                     // it will make it so the warning message gets resent upon another bot startup. im not looking for Every message in the channel. id rather kms.  
                     return // prevents mods or admins from getting banned by the bot.
                 } else {
-                    // await message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pika's discord scam detector"})
+                    await message.member.ban({deleteMessageSeconds: 60, reason: "Flagged by pika's discord scam detector"})
                     let unbanButton = new ButtonBuilder()
                     .setEmoji("❤️")
                     .setLabel("Unban?")
